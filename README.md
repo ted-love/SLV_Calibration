@@ -7,6 +7,7 @@ Calibrates the Heston Dynamics using Levenbergd-Marquardt from my Heston_calibra
 Uses the Forward-Kolmorogov Equation to solve the transition probability density function and retrieve the Leverage function. 
 
 Sources:
+
 Lorenzo Bergomi, (2015), "Stochastic Volatility Modeling." 
 
 Iain, J, Clark (2010), "Foreign Exchange Option Pricing: A Practitioner's Guide."
