@@ -6,7 +6,7 @@ Includes creating an arbtirage free IV surface with interpolation and extrapolat
 Calibrates the Heston Dynamics using Levenbergd-Marquardt from my Heston_calibration repository.
 Uses the Forward-Kolmorogov Equation to solve the transition probability density function and retrieve the Leverage function. 
 
-![My Image](loca_arb_free_surface.png)
+![My Image](local_arb_free_surface.png)
 
 Sources:
 
