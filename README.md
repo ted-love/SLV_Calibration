@@ -8,9 +8,13 @@ Uses the Forward-Kolmorogov Equation to solve the transition probability density
 
 Sources:
 Lorenzo Bergomi, (2015), "Stochastic Volatility Modeling." 
+
 Iain, J, Clark (2010), "Foreign Exchange Option Pricing: A Practitioner's Guide."
+
 Jim Gatheral (2006), "The Volatility Surface."
+
 Zhu, et al (2014), "FX Option Pricing with Stochastic-Local Volatility Model. 
+
 Zeliade Systems (2009), "Quasi-Explicit Calibration of Gatheral's SVI model."
 
 Dependencies:
