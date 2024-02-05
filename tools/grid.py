@@ -293,6 +293,7 @@ def make_fokker_matrices(n, m1, m2, m, rho, sigma, r_d, r_f, kappa, theta, V_vec
     """
     
     if n==1:
+        
 
         I_x = np.eye(m1)
         I_v = np.eye(m2)
@@ -321,4 +322,28 @@ def make_fokker_matrices(n, m1, m2, m, rho, sigma, r_d, r_f, kappa, theta, V_vec
         A2 = np.kron( 0.5 * (sigma**2) * D_vv.T @ V_vec_I + 
               kappa*D_v.T @ (theta*I_v - V_vec_I) , I_x)
         A2 = sparse.csc_matrix(A2)
+        
+        A = A0 + A1 + A2
+        
+        matrix_helpers = [a0,a1_1,a1_2,a1_3,A2,I_v]
+        
+        return A,A0,A1,A2,matrix_helpers 
     
+    else:
+        
+        [a0,a1_1,a1_2,a1_3,A2,I_v] = matrix_helpers 
+         
+        L_kron = sparse.csc_matrix(np.kron(I_v, Lev))
+        L2_kron = L_kron.power(2)
+         
+        A0 = a0 @ L_kron
+        A0 = sparse.csc_matrix(A0)
+        
+        A1 =  a1_1 @ L2_kron \
+             + a1_2 \
+            - a1_3 @ L2_kron
+            
+        A = A0 + A1 + A2
+            
+        return A,A0,A1,A2,matrix_helpers 
+
