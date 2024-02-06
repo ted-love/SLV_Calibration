@@ -26,6 +26,7 @@ from tools.SVI import svi_optimise, svi_model
 from tools import FX_correlation
 import py_vollib_vectorized
 from tools import plotting
+from tools.SLV_monte_carlo import SLV_MC
 
 
 #%%
@@ -362,25 +363,20 @@ Creating spatial grids to solve the Fokker-Planck (Kolmogorov Forward Equation)
 m1 = 200               # Spatial steps for log-returns, x=log(S_t/S_0)
 m2 = 50                # Spatial steps for variance
 m = m1 * m2        
-N=180
+N = 50
 T_max = T.max()
 
 
 K_mid = np.median(strikes)
-Smax = S_0 * np.exp(1)
+Smax = S_0 * np.exp(2)
 Vmax = 0.5
 
 # Creating non-uniform spatial grid
 X_vec, Delta_X, V_vec, Delta_V, X_vec_mesh, V_vec_mesh = grid.make_grid(m1, m2, Smax, S_0, K_mid, Vmax, V_0)
 
-# Creating non-uniform time grid where more steps are closer to t=0
-_, _, T_vec, Delta_T, _, _ = grid.make_grid(m1, N, Smax, S_0, K_mid, T_max, 1)
-Delta_T = Delta_T[1:-1]
-dt_0 = T_vec[0]
+Delta_T = T_max/N/40
 
 T_vec = np.linspace(0,T_max,N)
-Delta_T = np.diff(T_vec)
-dt_0=Delta_T[0]/9
 
 X_vec = np.array(X_vec).reshape(m1,1)     # Spatial coordinates for the log-returns X=log(S_i,S_0) as a vector
 V_vec = np.array(V_vec).reshape(m2,1)     # Spatial coordinates for the variance as a vector
@@ -458,7 +454,7 @@ def initial_condition(X, V, L_00, v_0, r0, q0, kappa, rho, theta, sigma, dt):
 
 
 
-P_0 = initial_condition(X_vec_mesh,V_vec_mesh-V_0,Lev_00,V_0,r_f[0],r_d[0],kappa,rho,v_bar,sigma,dt_0)
+P_0 = initial_condition(X_vec_mesh,V_vec_mesh-V_0,Lev_00,V_0,r_f[0],r_d[0],kappa,rho,v_bar,sigma,Delta_T)
 
 
 # Checking density
@@ -493,71 +489,13 @@ def Douglas_Scheme(m, m1, m2, r_d, r_f, N, P0, Leverage_function, Delta_T, alpha
     
     Description
     -----------
-    Douglas ADI scheme.
+    Douglas ADI scheme. This is solving the Fokker-Planck (Kolmogorov-Forward equation)
     More information can be found here: https://dspace.mit.edu/bitstream/handle/1721.1/56567/18-336Spring-2005/NR/rdonlyres/Mathematics/18-336Spring-2005/1A0AFFF5-36BD-4177-9E36-77D6EDB55E99/0/adi_method.pdf
-
-    Parameters
-    ----------
-    m : TYPE
-        DESCRIPTION.
-    m1 : TYPE
-        DESCRIPTION.
-    m2 : TYPE
-        DESCRIPTION.
-    r_d : TYPE
-        DESCRIPTION.
-    r_f : TYPE
-        DESCRIPTION.
-    N : TYPE
-        DESCRIPTION.
-    P0 : TYPE
-        DESCRIPTION.
-    Leverage_function : TYPE
-        DESCRIPTION.
-    Delta_T : TYPE
-        DESCRIPTION.
-    alpha : TYPE
-        DESCRIPTION.
-    D_x : TYPE
-        DESCRIPTION.
-    D_xx : TYPE
-        DESCRIPTION.
-    D_v : TYPE
-        DESCRIPTION.
-    D_vv : TYPE
-        DESCRIPTION.
-    T_vec : TYPE
-        DESCRIPTION.
-    X_vec : TYPE
-        DESCRIPTION.
-    V_vec : TYPE
-        DESCRIPTION.
-    w_x : TYPE
-        DESCRIPTION.
-    w_v : TYPE
-        DESCRIPTION.
-    local_vol_interp : TYPE
-        DESCRIPTION.
-    rho : TYPE
-        DESCRIPTION.
-    sigma : TYPE
-        DESCRIPTION.
-    kappa : TYPE
-        DESCRIPTION.
-    theta : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    P_mat : TYPE
-        DESCRIPTION.
-    Leverage_function : TYPE
-        DESCRIPTION.
 
     """
     P_vec = P0.flatten()
     I = np.identity(m)
-    X,V=np.meshgrid(X_vec,V_vec)
+
     
     eps=1e-8
 
@@ -569,15 +507,15 @@ def Douglas_Scheme(m, m1, m2, r_d, r_f, N, P0, Leverage_function, Delta_T, alpha
 
         A,A_0,A_1,A_2,matrix_helpers =  grid.make_fokker_matrices(n,m1, m2, m, rho, sigma, r_d[n], r_f[n], kappa, theta, V_vec, L, D_x, D_xx, D_v, D_vv, matrix_helpers)
         
-        inv_ini_1 = sparse.csc_matrix(I - alpha*Delta_T[n]*A_1)
+        inv_ini_1 = sparse.csc_matrix(I - alpha*Delta_T*A_1)
         inv_1 = sparse.linalg.inv(inv_ini_1)
         
-        inv_ini_2 = sparse.csc_matrix(I - alpha*Delta_T[n]*A_2)
+        inv_ini_2 = sparse.csc_matrix(I - alpha*Delta_T*A_2)
         inv_2 = sparse.linalg.inv(inv_ini_2)
   
-        Y_0 = P_vec + Delta_T[n]*A*P_vec
-        Y_1 = inv_1 * (Y_0 - alpha*Delta_T[n]*A_1*P_vec)
-        Y_2 = inv_2 * (Y_1 - alpha*Delta_T[n]*A_2*P_vec)
+        Y_0 = P_vec + Delta_T*A*P_vec
+        Y_1 = inv_1 * (Y_0 - alpha*Delta_T*A_1*P_vec)
+        Y_2 = inv_2 * (Y_1 - alpha*Delta_T*A_2*P_vec)
 
         P_vec = Y_2   
         P_mat = P_vec.reshape(m2,m1)
@@ -608,37 +546,69 @@ def Douglas_Scheme(m, m1, m2, r_d, r_f, N, P0, Leverage_function, Delta_T, alpha
 
         L = sparse.csc_matrix(np.diag(Leverage_function[:,n])) 
         print('Iteration ',n," out of ",N-1)
-        if n==3:
-            return P_mat,Leverage_function
-            
+
     return P_mat,Leverage_function
 
-P,Leverage_function = Douglas_Scheme(m, m1, m2, r_d, r_f, N, P_0, Leverage_function, Delta_T, alpha, D_x, D_xx, D_v, D_vv, T_vec, X_vec, V_vec, w_x, w_v, local_vol_interpolation, rho, sigma, kappa, theta)
+P, Leverage_function = Douglas_Scheme(m, m1, m2, r_d, r_f, N, P_0, Leverage_function, Delta_T, alpha, D_x, D_xx, D_v, D_vv, T_vec, X_vec, V_vec, w_x, w_v, local_vol_interpolation, rho, sigma, kappa, theta)
+
+np.savetxt('Leverage_func.csv',Leverage_function,delimiter=',')
 
 
-P_sum = 0
-for i in range(m1):
-    for j in range(m2):
-        P_sum += P[j,i] * w_x[i] * w_v[j]
-print("Sum of the density: ",P_sum)
 
 
 T_mesh,X_mesh_T = np.meshgrid(T_vec,X_vec)
+plotting.plot_subplots_2(P,X_vec_mesh,V_vec_mesh,Leverage_function,X_mesh_T,T_mesh)
 
-fig = make_subplots(rows=1, cols=2,
-                    specs=[[{'type': 'Surface'}, {'type': 'Surface'}]],subplot_titles=['Density',
-                            'Leverage Function'],shared_xaxes=False,shared_yaxes=False)
+#%% 
+"""
+Interpolating the leverage function to use for MC simulation
+"""
 
-fig.add_trace(go.Surface(z=P,x=V_vec_mesh,y=X_vec_mesh,showscale=False), row=1, col=1)
-fig.add_trace(go.Surface(z=Leverage_function ,x=X_mesh_T,y=T_mesh,showscale=False), row=1, col=2)
+time=np.linspace(0,T_max,N)
 
-fig.update_scenes(xaxis_title_text='Variance, V',  
-                  yaxis_title_text='log-moneyness: log(S_t/S_0)',  
-                  zaxis_title_text='Density, P',row=1,col=1)
+time_steps , spatial_steps = np.meshgrid(time,np.exp(X_vec.squeeze())*S_0)
 
-fig.update_scenes(xaxis_title_text='log-moneyness: log(S_t/S_0)',  
-                  yaxis_title_text='Time (years)',  
-                  zaxis_title_text='Leverage Function',row=1,col=2)
-fig.show()
+Leverage_function_interpolation = interpolate.Rbf(time_steps.flatten(),spatial_steps.flatten(),Leverage_function.flatten())
+#%%
+"""
+MC simulation
+"""
+Nsteps = 400
+Nsims = 10000
+
+S_mc = SLV_MC(v0, kappa, sigma, theta, rho, Domestic_Curve, Foreign_Curve , Leverage_function_interpolation, S_0, T_max, Nsteps, Nsims)
+
+
+
+S_mc = np.genfromtxt('MC_Result.csv',delimiter=',')
+
+
+#%%
+
+"""
+Backing out implied volatility and then calculating RMSE..
+"""
+
+num_options = np.size(Data.T)
+C=np.empty(num_options)
+for i in range(num_options):
+    t = Data.T[i]
+    flag = Data.flag[i]
+    k = Data.K[i]
+    step = np.floor((t/T_max) * Nsteps-1)
+    step = int(step)
+    r = Domestic_Curve(t)
+    if flag=='c':
+        C[i] = np.exp(-r*t) * np.mean(np.maximum(S_mc[:,step]-k,0))
+    if flag=='p':
+        C[i] = np.exp(-r*t) * np.mean(np.maximum(k-S_mc[:,step],0))
+        
+
+calibrated_vol = py_vollib_vectorized.vectorized_implied_volatility(C, S_0, Data.K, Data.T, Data.r, Data.flag, Data.q, return_as='numpy')
+
+
+
+RMSE = np.sqrt( 1/np.size(calibrated_vol) * np.sum((calibrated_vol - Data.market_vol)**2))
+print(RMSE)
 
 

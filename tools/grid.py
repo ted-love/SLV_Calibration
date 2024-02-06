@@ -332,8 +332,8 @@ def make_fokker_matrices(n, m1, m2, m, rho, sigma, r_d, r_f, kappa, theta, V_vec
     else:
         
         [a0,a1_1,a1_2,a1_3,A2,I_v] = matrix_helpers 
-         
-        L_kron = sparse.csc_matrix(np.kron(I_v, Lev))
+     
+        L_kron = sparse.kron(I_v, Lev)
         L2_kron = L_kron.power(2)
          
         A0 = a0 @ L_kron
