@@ -2,12 +2,12 @@
 
 Full SLV Calibration procedure on FX options data.
 
-Includes creating an arbtirage free IV surface with interpolation and extrapolation to retrieve the local volatility surface.
-Calibrates the Heston Dynamics using Levenbergd-Marquardt from my Heston_calibration repository.
-Uses the Forward-Kolmorogov Equation to solve the transition probability density function and retrieve the Leverage function. 
-
+The implied volatility surface was interpolated and extrapolated such that it was arbitrage-free using quasi-SVI. Then the local volatility surface was generated from the arbitage-free surface, featured below.
 ![My Image](local_arb_free_surface.png)
 
+Then using Levenbergd-Marquardt algorithm, the pure Heston Dynamics were calibrated. Afterwards, the Kolmorogov-Forward Equation was solved to find the transition probability density function, which was then used to retrieve the Leverage function. 
+
+![My Image](LEV.png)
 
 Sources:
 
