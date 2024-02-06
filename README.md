@@ -13,6 +13,8 @@ Then using Levenbergd-Marquardt algorithm, the pure Heston Dynamics were calibra
 
 ![My Image](LEV.png)
 
+Then using the Monte Carlo method, the Vanilla options were priced and the implied vol was backed-out and compared to the initial market data, the RMSE was: 0.04674690245958727.
+
 Sources:
 
 Lorenzo Bergomi, (2015), "Stochastic Volatility Modeling." 
