@@ -1,0 +1,140 @@
+{
+    "job_id": "OPRA-20240302-K4KR68M3RV",
+    "files": [
+        {
+            "filename": "condition.json",
+            "size": 2156,
+            "hash": "sha256:5e4ab1c0c1cf2b727dfb011698a3e4c9b0cca449d741e2bd9eb816740170f525",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/condition.json",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/condition.json"
+            }
+        },
+        {
+            "filename": "metadata.json",
+            "size": 707,
+            "hash": "sha256:4cc10fe36e21f8008e1e0ed3f9a39298f4d08b4e49949bb71ae6c888216bd54f",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/metadata.json",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/metadata.json"
+            }
+        },
+        {
+            "filename": "symbology.json",
+            "size": 2082,
+            "hash": "sha256:be09bfa6b6a6be66745ab0f00025b85e4b1c20860e394ef6c6150bcb46fd0588",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/symbology.json",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/symbology.json"
+            }
+        },
+        {
+            "filename": "symbology.csv",
+            "size": 906,
+            "hash": "sha256:b086741e9a4dbf21e3e26fae5135f6e8218a776a89736c40bd44ab4d1e57a923",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/symbology.csv",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/symbology.csv"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240201.mbp-1.csv.zst",
+            "size": 8236939,
+            "hash": "sha256:2078d3077c37003c4fca81733809b936e821a72ddc08188de61138f17759ceab",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240201.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240201.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240202.mbp-1.csv.zst",
+            "size": 8702557,
+            "hash": "sha256:43fe16cce0eb8642e1048e718042609c6cd901400bf41ad2f5600e62ec6cd177",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240202.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240202.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240205.mbp-1.csv.zst",
+            "size": 6102117,
+            "hash": "sha256:701a6101f05356bbbc902288be58bc98622d8f7aa02851f3afdc12bd268bb1a2",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240205.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240205.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240206.mbp-1.csv.zst",
+            "size": 4256764,
+            "hash": "sha256:7c0fb4b6e6d11e634d31a777d0e08fa936cb2d8dd7e1f8d506e39748ed635368",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240206.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240206.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240207.mbp-1.csv.zst",
+            "size": 5306199,
+            "hash": "sha256:64a74a6dd49fb04e35b7097e9ad0f612199c9acd4b5b5dadfbf92976b74cd249",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240207.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240207.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240208.mbp-1.csv.zst",
+            "size": 4130831,
+            "hash": "sha256:3cc23539e6d61aa886463a58fcca66be919494831f23f8b1e581c9bc502edb80",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240208.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240208.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240209.mbp-1.csv.zst",
+            "size": 3470654,
+            "hash": "sha256:5d5d023deca52964d207061f9938255e73a3777266e28840e8a54a9a5c429b2c",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240209.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240209.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240212.mbp-1.csv.zst",
+            "size": 5750552,
+            "hash": "sha256:2ebc0dff229bae47c13db6b677d8ea2ca80c0531e0c5b483d884629c41d99b9f",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240212.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240212.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240213.mbp-1.csv.zst",
+            "size": 10884196,
+            "hash": "sha256:b3e56aead6d78fd46e7a9f0def4542dcb26f14e6fe02f0e12f8ef21335669115",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240213.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240213.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240214.mbp-1.csv.zst",
+            "size": 9732905,
+            "hash": "sha256:e644971ca787acebcd1514aab1471fe19de6fa1d7ad457221a1c1ad1c08afe4a",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240214.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240214.mbp-1.csv.zst"
+            }
+        },
+        {
+            "filename": "opra-pillar-20240215.mbp-1.csv.zst",
+            "size": 6486073,
+            "hash": "sha256:65420f238d148d2b58c95abc4dccea5c40ebff211150ad48d712f29f1568fa53",
+            "urls": {
+                "https": "https://api.databento.com/v0/batch/download/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240215.mbp-1.csv.zst",
+                "ftp": "ftp://ftp.databento.com/YPS4VSBK/OPRA-20240302-K4KR68M3RV/opra-pillar-20240215.mbp-1.csv.zst"
+            }
+        }
+    ]
+}
