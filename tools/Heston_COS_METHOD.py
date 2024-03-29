@@ -219,7 +219,7 @@ def heston_cosine_method(S,K,T,N,L,r,q,v_bar,v0,sigma,rho,kappa,flag):
     kappa : Float
         Rate of mean-reversion of the volatility.
     flag : int
-        Type of European option. flag=1 for call option and flag=-1 for put option.
+        Type of European option. flag='c' for call option and flag='p' for put option.
 
     Returns
     -------
