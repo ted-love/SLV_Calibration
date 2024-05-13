@@ -8,7 +8,7 @@ The implied volatility surface was interpolated and extrapolated such that it wa
 ![My Image](local_arb_free_surface.png)
 
 
-Then using Levenbergd-Marquardt algorithm, the pure Heston Dynamics were calibrated. Afterwards, the Kolmorogov-Forward Equation was solved to find the transition probability density function, which was then used to retrieve the Leverage function. 
+Then using Levenberg-Marquardt algorithm, the pure Heston Dynamics were calibrated. Afterwards, the Kolmorogov-Forward Equation was solved to find the transition probability density function, which was then used to retrieve the Leverage function. 
 
 
 ![My Image](LEV.png)
