@@ -31,4 +31,5 @@ Dependencies:
 ```
 pip install yfinance
 pip install py_vollib_vectorized
+pip install plotly
 ```
